@@ -31,12 +31,14 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                onPress={() => navigation.navigate("Chat")}
-                style={styles.chatButton}
+            onPress={() =>{console.log("sadas")
+             navigation.navigate("Chat")}}
+            // onPress={() =>{console.log("sadas")} navigation.navigate("Chat")}
+            style={styles.chatButton}
             >
                 <Entypo name="chat" size={24} color={colors.lightGray} />
             </TouchableOpacity>
-        </View>
+         </View>
     );
     };
 

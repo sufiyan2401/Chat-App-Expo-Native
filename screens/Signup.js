@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image, SafeAreaView, TouchableOpacity, StatusBar, Alert } from "react-native";
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
+import { getFirestore } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore"; 
+import { initializeApp } from "firebase/app";
+import { database } from '../config/firebase';
 const backImage = require("../assets/backImage.png");
 
 export default function Signup({ navigation }) {
+  
+  
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 const onHandleSignup = () => {
     if (email !== '' && password !== '') {
-  createUserWithEmailAndPassword(auth, email, password)
-        .then(() => console.log('Signup success'))
+  createUserWithEmailAndPassword(auth, email, password).then(()=>{
+console.log("signup success")
+setDoc(doc(database, "users",email), {
+  gmail:email,
+  pass:password
+});
+  })
+        // .then(() => console.log('Signup success'))
         .catch((err) => Alert.alert("Login error", err.message));
     }
   };
